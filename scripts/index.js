@@ -4,6 +4,7 @@ const { useState, useEffect } = React;
 const audio = new Audio("01 - Victor Lundberg - We Are Meant To Be.m4a");
 audio.loop = true;
 audio.volume = 0.3;
+audio.play().catch(() => {});
 
 function GifBox({ src }) {
   return (
@@ -132,10 +133,10 @@ function ValentineProposal() {
         setFade(true);
       }, 600);
 
-    }, 5000);
+    }, 5200);
 
     return () => clearInterval(interval);
-  }, [page]);
+  }, [page, media.length]);
 
 
   const handleNoClick = () => {
@@ -316,8 +317,11 @@ function ValentineProposal() {
 
   if (page === "slideshow") {
     return (
-      <div
-        className="min-h-screen bg-black flex flex-col items-center justify-center p-4 relative overflow-hidden"
+<div
+  className="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden"
+  style={{
+    background: "radial-gradient(circle at center, #111 0%, #000 80%)"
+  }}
         onTouchStart={(e) => window.touchStartX = e.changedTouches[0].screenX}
         onTouchEnd={(e) => {
           const diff = e.changedTouches[0].screenX - window.touchStartX;
@@ -336,8 +340,10 @@ function ValentineProposal() {
 
           {media[currentIndex].type === "image" ? (
             <img
+              key={media[currentIndex].src}
               src={media[currentIndex].src}
-              className={`max-w-[90vw] max-h-[75vh] object-contain transition-all duration-700 ${fade ? "opacity-100 scale-100" : "opacity-0 scale-95"
+              alt="memory"
+              className={`max-w-[90vw] max-h-[75vh] object-contain transition-opacity duration-500 ease-in-out ${fade ? "opacity-100" : "opacity-0"
                 }`}
             />
           ) : (
@@ -349,7 +355,7 @@ function ValentineProposal() {
               playsInline
               webkit-playsinline="true"
               preload="auto"
-              className={`max-w-[90vw] max-h-[75vh] object-contain transition-all duration-700 ${fade ? "opacity-100 scale-100" : "opacity-0 scale-95"
+              className={`max-w-[90vw] max-h-[75vh] object-contain transition-opacity duration-500 ease-in-out ${fade ? "opacity-100 scale-100" : "opacity-0 scale-95"
                 }`}
             >
               <source src={media[currentIndex].src} type="video/mp4" />
