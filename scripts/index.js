@@ -88,7 +88,7 @@ function ValentineProposal() {
     { type: "video", src: "images/27.MP4" },
     { type: "image", src: "images/28.5.jpg" },
     { type: "image", src: "images/28.jpg" },
-    { type: "image", src: "images/29.jpg" },
+    { type: "image", src: "images/29.JPG" },
     { type: "image", src: "images/30.5.jpg" },
     { type: "video", src: "images/30.mp4" },
     { type: "video", src: "images/31.mp4" },
