@@ -1,4 +1,4 @@
-const { useState } = React;
+const { useState, useEffect } = React;
 
 /* 🎵 Global Background Music */
 const audio = new Audio("01 - Victor Lundberg - We Are Meant To Be.m4a");
@@ -48,13 +48,98 @@ let noClick = 1;
 function ValentineProposal() {
   const [page, setPage] = useState('landing');
   const [yesButtonScale, setYesButtonScale] = useState(1);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [fade, setFade] = useState(true);
+
+  const media = [
+    { type: "image", src: "images/3.jpg" },
+    { type: "image", src: "images/2.jpg" },
+    { type: "image", src: "images/3.5.jpg" },
+    { type: "image", src: "images/1.jpg" },
+    { type: "video", src: "images/4.5.mp4" },
+    { type: "video", src: "images/4.9.mp4" },
+    { type: "video", src: "images/4.51.mp4" },
+    { type: "video", src: "images/4.52.mp4" },
+    { type: "image", src: "images/4.jpg" },
+    { type: "image", src: "images/5.png" },
+    { type: "image", src: "images/6.jpg" },
+    { type: "image", src: "images/7.jpg" },
+    { type: "video", src: "images/8.mp4" },
+    { type: "image", src: "images/9.jpg" },
+    { type: "image", src: "images/10.jpg" },
+    { type: "image", src: "images/11.jpg" },
+    { type: "image", src: "images/12.jpg" },
+    { type: "image", src: "images/14.jpg" },
+    { type: "video", src: "images/14.mp4" },
+    { type: "video", src: "images/15.mp4" },
+    { type: "video", src: "images/16.5.mp4" },
+    { type: "video", src: "images/16.mp4" },
+    { type: "image", src: "images/17.jpeg" },
+    { type: "image", src: "images/18.png" },
+    { type: "image", src: "images/19.png" },
+    { type: "image", src: "images/20.png" },
+    { type: "image", src: "images/21.png" },
+    { type: "image", src: "images/22.png" },
+    { type: "image", src: "images/23.png" },
+    { type: "image", src: "images/24.png" },
+    { type: "image", src: "images/25.png" },
+    { type: "image", src: "images/26.png" },
+    { type: "video", src: "images/27.mp4" },
+    { type: "image", src: "images/28.5.jpg" },
+    { type: "image", src: "images/28.jpg" },
+    { type: "image", src: "images/29.jpg" },
+    { type: "image", src: "images/30.5.jpg" },
+    { type: "video", src: "images/30.mp4" },
+    { type: "video", src: "images/31.mp4" },
+    { type: "video", src: "images/32.mp4" },
+    { type: "video", src: "images/33.5.mp4" },
+    { type: "video", src: "images/33.mp4" },
+    { type: "video", src: "images/34.mp4" },
+    { type: "video", src: "images/35.mp4" },
+    { type: "image", src: "images/36.jpg" },
+    { type: "image", src: "images/37.jpg" },
+    { type: "video", src: "images/38.mov" },
+    { type: "video", src: "images/39.5.mp4" },
+    { type: "image", src: "images/39.jpg" },
+    { type: "video", src: "images/40.mp4" },
+    { type: "image", src: "images/50.jpg" },
+    { type: "image", src: "images/51.png" },
+    { type: "image", src: "images/52.png" },
+    { type: "image", src: "images/53.png" },
+    { type: "image", src: "images/54.png" },
+    { type: "video", src: "images/55.mp4" },
+    { type: "image", src: "images/56.png" },
+    { type: "image", src: "images/57.jpg" },
+    { type: "image", src: "images/58.jpg" },
+    { type: "image", src: "images/59.jpg" },
+  ];
+
 
   const startMusic = () => {
-    audio.play().catch(() => {});
+    audio.play().catch(() => { });
   };
 
+  useEffect(() => {
+    if (page !== "slideshow") return;
+
+    const interval = setInterval(() => {
+      setFade(false);
+
+      setTimeout(() => {
+        setCurrentIndex(prev =>
+          prev === media.length - 1 ? 0 : prev + 1
+        );
+        setFade(true);
+      }, 600);
+
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [page]);
+
+
   const handleNoClick = () => {
-    if (noClick === 1){
+    if (noClick === 1) {
       window.alert(`Be a good girl, will ya?
         Let's try again😪`);
     }
@@ -80,10 +165,10 @@ function ValentineProposal() {
 
           <div className="flex gap-4 justify-center">
             <button
-              onClick={() => { 
+              onClick={() => {
                 startMusic();
-                resetYesButton(); 
-                setPage('yes-first'); 
+                resetYesButton();
+                setPage('yes-first');
               }}
               className="px-8 py-4 bg-blue-500 text-white rounded-full text-xl font-semibold hover:scale-110 transition"
             >
@@ -201,7 +286,7 @@ function ValentineProposal() {
         <div className="text-center relative z-10 text-white">
           <h1 className="text-6xl font-bold mb-6">Awww how sweeeeeet! 🥰💖</h1>
 
-          <p className="text-3xl">💜 Happy Valentine's Day PS! 💜</p>
+          <p className="text-3xl">💜 Happy Valentine's Day PS darling! 💜</p>
 
           <p className="text-xl">
             Thank you for coming into my life and becoming such an important part of it bhai. I honestly don’t know how I survived before you lmao, but I know one thing for sure. I can’t imagine surviving without you now.
@@ -212,14 +297,83 @@ function ValentineProposal() {
             Your heart is kinder than a golden retriever puppy pure, warm, and full of unconditional love.
             You are more beautiful than the most breathtaking night sky in the Northern Hemisphere, the kind people travel across the world just to witness once.
             Your forehead is mas...
-            Your forehead is mashallah🤪 
+            Your forehead is mashallah🤪
             I love everything that you are, and everything you are still becoming, my tinnie. I want you to achieve every dream you’ve ever dared to dream, and I want to stand beside you while you do.
             I love you so, so, so much… more than these words could ever truly hold. 💜💜💜
           </p>
+          <button
+            onClick={() => setPage('slideshow')}
+            className="mt-8 px-8 py-4 bg-pink-500 text-white rounded-full text-xl font-semibold hover:scale-110 transition"
+          >
+            See Our Memories 💜
+          </button>
         </div>
       </div>
     );
   }
+
+  /* ================= SLIDESHOW PAGE ================= */
+
+  if (page === "slideshow") {
+    return (
+      <div
+        className="min-h-screen bg-black flex flex-col items-center justify-center p-4 relative overflow-hidden"
+        onTouchStart={(e) => window.touchStartX = e.changedTouches[0].screenX}
+        onTouchEnd={(e) => {
+          const diff = e.changedTouches[0].screenX - window.touchStartX;
+          if (diff > 50) {
+            setCurrentIndex(prev => prev === 0 ? media.length - 1 : prev - 1);
+          } else if (diff < -50) {
+            setCurrentIndex(prev => prev === media.length - 1 ? 0 : prev + 1);
+          }
+        }}
+      >
+        <h1 className="text-4xl text-white font-bold mb-6">
+          Our Memories 💜
+        </h1>
+
+        <div className="relative z-10 flex items-center justify-center w-full h-[75vh]">
+
+          {media[currentIndex].type === "image" ? (
+            <img
+              src={media[currentIndex].src}
+              className={`max-w-[90vw] max-h-[75vh] object-contain transition-all duration-700 ${fade ? "opacity-100 scale-100" : "opacity-0 scale-95"
+                }`}
+            />
+          ) : (
+            <video
+              src={media[currentIndex].src}
+              autoPlay
+              muted
+              loop
+              className={`max-w-[90vw] max-h-[75vh] object-contain transition-all duration-700 ${fade ? "opacity-100 scale-100" : "opacity-0 scale-95"
+                }`}
+            />
+          )}
+
+        </div>
+
+        <div className="flex gap-2 mt-6">
+          {media.map((_, index) => (
+            <div
+              key={index}
+              onClick={() => setCurrentIndex(index)}
+              className={`w-3 h-3 rounded-full cursor-pointer ${currentIndex === index ? "bg-pink-400" : "bg-gray-500"
+                }`}
+            />
+          ))}
+        </div>
+
+        <button
+          onClick={() => setPage("final")}
+          className="mt-8 px-6 py-3 bg-gray-700 text-white rounded-full hover:scale-110 transition"
+        >
+          ⬅ Back
+        </button>
+      </div>
+    );
+  }
+
 
   return null;
 }
