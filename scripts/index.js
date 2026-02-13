@@ -112,7 +112,7 @@ function ValentineProposal() {
     { type: "image", src: "images/56.PNG" },
     { type: "image", src: "images/57.JPG" },
     { type: "image", src: "images/58.JPG" },
-    { type: "image", src: "images/59.JPG" },
+    { type: "image", src: "images/WhatsApp Image 2026-02-14 at 2.02.50 AM.jpeg" },
   ];
 
 
