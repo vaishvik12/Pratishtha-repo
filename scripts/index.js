@@ -1,4 +1,9 @@
-const { useState, useEffect } = React;
+const { useState } = React;
+
+/* 🎵 Global Background Music */
+const audio = new Audio("01 - Victor Lundberg - We Are Meant To Be.m4a");
+audio.loop = true;
+audio.volume = 0.3;
 
 function GifBox({ src }) {
   return (
@@ -37,22 +42,31 @@ function FallingFlowers() {
     </div>
   );
 }
+
 let noClick = 1;
+
 function ValentineProposal() {
   const [page, setPage] = useState('landing');
   const [yesButtonScale, setYesButtonScale] = useState(1);
+
+  const startMusic = () => {
+    audio.play().catch(() => {});
+  };
 
   const handleNoClick = () => {
     if (noClick === 1){
       window.alert(`Be a good girl, will ya?
         Let's try again😪`);
-    };
+    }
     noClick++;
     setYesButtonScale(prev => prev + 0.3);
   };
+
   const resetYesButton = () => setYesButtonScale(1);
 
   const bgClass = "min-h-screen bg-[#cfe9ff] flex items-center justify-center p-4 relative overflow-hidden";
+
+  /* ================= LANDING ================= */
 
   if (page === 'landing') {
     return (
@@ -66,7 +80,11 @@ function ValentineProposal() {
 
           <div className="flex gap-4 justify-center">
             <button
-              onClick={() => { resetYesButton(); setPage('yes-first'); }}
+              onClick={() => { 
+                startMusic();
+                resetYesButton(); 
+                setPage('yes-first'); 
+              }}
               className="px-8 py-4 bg-blue-500 text-white rounded-full text-xl font-semibold hover:scale-110 transition"
             >
               Yes
@@ -84,11 +102,13 @@ function ValentineProposal() {
     );
   }
 
+  /* ================= NO PAGE ================= */
+
   if (page === 'no-first') {
     window.alert("Badmash aurat!!!!🤬💢");
+
     return (
       <div className={bgClass}>
-        
         <div className="text-center">
           <h1 className="text-6xl font-bold mb-6">How dare you? 😤🔫</h1>
 
@@ -105,11 +125,15 @@ function ValentineProposal() {
     );
   }
 
+  /* ================= YES FIRST ================= */
+
   if (page === 'yes-first') {
     return (
       <div className={bgClass}>
         <div className="text-center">
-          <h1 className="text-6xl font-bold mb-6">That's like a good girl. Following daddy's orders 🤪😘🥰😍</h1>
+          <h1 className="text-6xl font-bold mb-6">
+            That's like a good girl. Following daddy's orders 🤪😘🥰😍
+          </h1>
 
           <GifBox src="https://tenor.com/view/cosytales-love-chubby-valentine-shy-gif-13430689965623448142.gif" />
 
@@ -123,6 +147,8 @@ function ValentineProposal() {
       </div>
     );
   }
+
+  /* ================= MAIN QUESTION ================= */
 
   if (page === 'valentine-question') {
     return (
@@ -155,45 +181,45 @@ function ValentineProposal() {
     );
   }
 
-if (page === 'final') {
-  return (
-    <div
-      className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden"
-      style={{
-        backgroundImage: "url('images/Pratishtha1.jpeg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat"
-      }}
-    >
-      <FallingFlowers />
+  /* ================= FINAL PAGE ================= */
 
-      {/* Dark overlay for readability */}
-      <div className="absolute inset-0 bg-black/40"></div>
+  if (page === 'final') {
+    return (
+      <div
+        className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden"
+        style={{
+          backgroundImage: "url('images/Pratishtha1.jpeg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat"
+        }}
+      >
+        <FallingFlowers />
 
-      <div className="text-center relative z-10 text-white">
-        <h1 className="text-6xl font-bold mb-6">Awww how sweeeeeet! 🥰💖</h1>
-        <p className="text-3xl">💜 Happy Early Valentine's Day PS my baby! 💜</p>
-        <p className="text-xl">Thank you for coming into my life and becoming such an important part of it. I honestly don’t know how I survived before you, but I know one thing for sure. I can’t imagine surviving without you now.
+        <div className="absolute inset-0 bg-black/40"></div>
 
-You are the sweetest and most precious gift my life has ever given me.
+        <div className="text-center relative z-10 text-white">
+          <h1 className="text-6xl font-bold mb-6">Awww how sweeeeeet! 🥰💖</h1>
 
-Your smile is brighter than a field of sunflowers, the kind that can light up even my darkest days.
-Your black eyes hold more depth than the Mariana Trench 
- endless, mysterious, and beautiful beyond words.
-Your mind is sharper than the finest Damascus blade, strong, thoughtful, and effortlessly brilliant.
-Your heart is kinder than a golden retriever puppy 
- pure, warm, and full of unconditional love.
-You are more beautiful than the most breathtaking night sky in the Northern Hemisphere, the kind people travel across the world just to witness once.
+          <p className="text-3xl">💜 Happy Valentine's Day PS! 💜</p>
 
-I love everything that you are, and everything you are still becoming, my tinnie. I want you to achieve every dream you’ve ever dared to dream, and I want to stand beside you while you do.
-
-I love you so, so, so much… more than these words could ever truly hold. 💜💜💜
-        </p>
+          <p className="text-xl">
+            Thank you for coming into my life and becoming such an important part of it bhai. I honestly don’t know how I survived before you lmao, but I know one thing for sure. I can’t imagine surviving without you now.
+            You are the sweetest and most precious gift my life has ever given me.
+            Your smile is brighter than a field of sunflowers, the kind that can light up even my darkest days.
+            Your black eyes hold more depth than the Mariana Trench endless, mysterious, and beautiful beyond words.
+            Your mind is sharper than the finest Damascus blade, strong, thoughtful, and effortlessly brilliant.
+            Your heart is kinder than a golden retriever puppy pure, warm, and full of unconditional love.
+            You are more beautiful than the most breathtaking night sky in the Northern Hemisphere, the kind people travel across the world just to witness once.
+            Your forehead is mas...
+            Your forehead is mashallah🤪 
+            I love everything that you are, and everything you are still becoming, my tinnie. I want you to achieve every dream you’ve ever dared to dream, and I want to stand beside you while you do.
+            I love you so, so, so much… more than these words could ever truly hold. 💜💜💜
+          </p>
+        </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 
   return null;
 }
