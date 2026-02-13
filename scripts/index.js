@@ -342,13 +342,19 @@ function ValentineProposal() {
             />
           ) : (
             <video
-              src={media[currentIndex].src}
+              key={media[currentIndex].src}
               autoPlay
               muted
               loop
+              playsInline
+              webkit-playsinline="true"
+              preload="auto"
               className={`max-w-[90vw] max-h-[75vh] object-contain transition-all duration-700 ${fade ? "opacity-100 scale-100" : "opacity-0 scale-95"
                 }`}
-            />
+            >
+              <source src={media[currentIndex].src} type="video/mp4" />
+            </video>
+
           )}
 
         </div>
